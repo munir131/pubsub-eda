@@ -17,7 +17,7 @@ class MessageController extends Controller
 
     public function send(Request $request)
     {
-        $message = $request->query('text', 'This is default message')
+        $message = $request->query('text', 'This is default message');
         dispatch(new ProcessMessage($message))
             ->onQueue('test')
             ->onConnection('pubsub');
