@@ -17,7 +17,10 @@ class MessageController extends Controller
 
     public function send(Request $request)
     {
-        ProcessMessage::dispatch()->onQueue('test');
+        $message = $request->query('text', 'This is default message')
+        dispatch(new ProcessMessage($message))
+            ->onQueue('test')
+            ->onConnection('pubsub');
         return 'Hello World';
     }
 
