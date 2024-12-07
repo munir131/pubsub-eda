@@ -37,7 +37,7 @@ function listenForMessages() {
 
     try {
       // Attempt to decode the message data
-      const decodedData = Buffer.from(message.data, 'base64').toString('utf-8');
+      let decodedData = Buffer.from(message.data.toString(), 'base64').toString();
       // console.log(`\tData (decoded): ${decodedData}`);
       const parsedData = JSON.parse(decodedData);
       console.log("Decoded and parsed JSON object:", parsedData);
