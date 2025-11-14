@@ -1,0 +1,38 @@
+# Spec for generating restricted_files.md
+version: 1
+name: generate_restricted_files_doc
+owner: ai
+
+description: |
+  Define guardrails for AI/codegen tools: what not to change, protected configs,
+  and process requirements when editing sensitive files.
+
+output:
+  target_file: restricted_files.md
+  format: markdown
+
+instructions: |
+  Write restricted_files.md including:
+  - Do not commit secrets (list examples)
+  - Avoid automated edits to certain files (lockfiles, binaries, generated code)
+  - Protected config areas (CI, infra templates)
+  - Documentation invariants
+  - Safe areas for AI edits
+  - Process for proposing restricted changes
+
+  Style:
+  - Use lists with rationale where helpful
+
+context_sources:
+  - formatting.md (optional)
+  - tech.md (optional)
+
+allowed_tools:
+  filesystem_read: true
+  filesystem_write: false
+  web_search: false
+  shell_commands: false
+
+acceptance_criteria:
+  - Provides clear do/don't lists
+  - Outlines review process for exceptions

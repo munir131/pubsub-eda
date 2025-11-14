@@ -1,0 +1,42 @@
+# Spec for generating tech.md
+version: 1
+name: generate_tech_doc
+owner: ai
+
+description: |
+  Define the technical stack, versioning, local development workflow, configuration,
+  CI considerations, security, testing, and observability for the EDA playground.
+
+output:
+  target_file: tech.md
+  format: markdown
+
+instructions: |
+  Write tech.md including sections:
+  - Stack (language, broker, containerization, observability)
+  - Versioning & Compatibility
+  - Local Development (prereqs, Make targets, env)
+  - Configuration (env vars, sensible defaults)
+  - CI (Optional)
+  - Security & Secrets
+  - Testing
+  - Observability
+
+  Style:
+  - Keep commands minimal and cross-platform where possible
+  - Prefer Docker-based local setup
+
+context_sources:
+  - brief.md (optional)
+  - architecture.md (optional)
+
+allowed_tools:
+  filesystem_read: true
+  filesystem_write: false
+  web_search: false
+  shell_commands: false
+
+acceptance_criteria:
+  - Sections listed above present
+  - Concrete Make target suggestions provided
+  - No hardcoded secrets or external links required to read

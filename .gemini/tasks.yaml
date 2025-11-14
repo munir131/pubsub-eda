@@ -1,0 +1,39 @@
+# Spec for generating tasks.md
+version: 1
+name: generate_tasks_doc
+owner: ai
+
+description: |
+  Produce a simple backlog with clear status tags, acceptance criteria, and sensible
+  ordering for building an EDA pub/sub playground.
+
+output:
+  target_file: tasks.md
+  format: markdown
+
+instructions: |
+  Write tasks.md with sections:
+  - Conventions (status, acceptance criteria)
+  - Now (3–5 tasks)
+  - Next (2–4 tasks)
+  - Later (2–4 tasks)
+  - Ideas/Parking Lot
+  - Changelog (append-only)
+
+  Style:
+  - Keep tasks small and testable
+  - Include acceptance criteria for each primary task
+
+context_sources:
+  - product.md (optional)
+  - architecture.md (optional)
+
+allowed_tools:
+  filesystem_read: true
+  filesystem_write: false
+  web_search: false
+  shell_commands: false
+
+acceptance_criteria:
+  - Tasks have clear outcomes and criteria
+  - Uses the status tags: TODO, DOING, BLOCKED, REVIEW, DONE

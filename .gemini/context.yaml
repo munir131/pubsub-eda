@@ -1,0 +1,40 @@
+# Spec for generating context.md
+version: 1
+name: generate_context_doc
+owner: ai
+
+description: |
+  Generate project context: business/domain background, constraints, assumptions,
+  risks, and a minimal glossary for EDA/pub-sub terminology.
+
+output:
+  target_file: context.md
+  format: markdown
+
+instructions: |
+  Write context.md outlining why the project exists and the domain language.
+  Include the following sections:
+  - Business Context
+  - Domain Context
+  - Constraints & Assumptions
+  - Risks
+  - Glossary
+
+  Style:
+  - Concise bullets over long prose
+  - Define terms clearly and consistently
+
+context_sources:
+  - brief.md (optional)
+  - product.md (optional)
+
+allowed_tools:
+  filesystem_read: true
+  filesystem_write: false
+  web_search: false
+  shell_commands: false
+
+acceptance_criteria:
+  - Contains all named sections
+  - Uses clear, unambiguous definitions
+  - Avoids broker-specific bias unless specified in inputs

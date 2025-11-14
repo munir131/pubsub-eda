@@ -1,0 +1,43 @@
+# Spec for generating architecture.md
+version: 1
+name: generate_architecture_doc
+owner: ai
+
+description: |
+  Describe the event-driven architecture for the pub/sub playground, including components,
+  event flow, reliability semantics, scalability, security, and observability.
+
+output:
+  target_file: architecture.md
+  format: markdown
+
+instructions: |
+  Write architecture.md with the following sections:
+  - Overview (short diagram optional via code block)
+  - Components (producers, broker, consumers, DLQ, observability)
+  - Event Flow (step-by-step)
+  - Reliability & Semantics (delivery, ordering, retries, DLQ)
+  - Scalability
+  - Security (TBD if not defined)
+  - Observability (logs, metrics, traces)
+  - Open Decisions
+
+  Style:
+  - Use headings and bullets
+  - Keep it broker-agnostic unless inputs specify otherwise
+
+context_sources:
+  - brief.md (optional)
+  - context.md (optional)
+  - product.md (optional)
+
+allowed_tools:
+  filesystem_read: true
+  filesystem_write: false
+  web_search: false
+  shell_commands: false
+
+acceptance_criteria:
+  - Sections present and coherent
+  - No vendor lock-in language unless specified
+  - Diagram renders as fenced code block (not external image)
