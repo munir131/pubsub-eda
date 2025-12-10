@@ -44,8 +44,25 @@ func main() {
 
 // publishMessage publishes a message to a Pub/Sub topic.
 func publishMessage(projectID, topicID, msg string) error {
-	fmt.Printf("Publishing message: %s\n", msg)
-	// TODO: Implement publishing logic.
+	ctx := context.Background()
+	client, err := pubsub.NewClient(ctx, projectID)
+	if err != nil {
+		return fmt.Errorf("pubsub.NewClient: %v", err)
+	}
+	defer client.Close()
+
+	t := client.Topic(topicID)
+	result := t.Publish(ctx, &pubsub.Message{
+		Data: []byte(msg),
+	})
+
+	// Block until the result is returned and a server-generated
+	// ID is returned for the published message.
+	id, err := result.Get(ctx)
+	if err != nil {
+		return fmt.Errorf("get: %v", err)
+	}
+	fmt.Printf("Published a message; msg ID: %v\n", id)
 	return nil
 }
 
