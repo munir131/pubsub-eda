@@ -1,0 +1,57 @@
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+	"os"
+
+	"cloud.google.com/go/pubsub"
+)
+
+// TODO: Replace with your Google Cloud project ID.
+const projectID = "your-gcp-project-id"
+const topicName = "test"
+const subscriptionName = "test-sub"
+
+func main() {
+	if len(os.Args) < 2 {
+		fmt.Println("Usage: go run main.go [publish|listen] [message]")
+		return
+	}
+
+	command := os.Args[1]
+
+	switch command {
+	case "publish":
+		if len(os.Args) < 3 {
+			fmt.Println("Usage: go run main.go publish <message>")
+			return
+		}
+		message := os.Args[2]
+		if err := publishMessage(projectID, topicName, message); err != nil {
+			log.Fatalf("Failed to publish message: %v", err)
+		}
+	case "listen":
+		if err := listenForMessages(projectID, subscriptionName); err != nil {
+			log.Fatalf("Failed to listen for messages: %v", err)
+		}
+	default:
+		fmt.Println("Unknown command:", command)
+		fmt.Println("Usage: go run main.go [publish|listen] [message]")
+	}
+}
+
+// publishMessage publishes a message to a Pub/Sub topic.
+func publishMessage(projectID, topicID, msg string) error {
+	fmt.Printf("Publishing message: %s\n", msg)
+	// TODO: Implement publishing logic.
+	return nil
+}
+
+// listenForMessages listens for messages on a Pub/Sub subscription.
+func listenForMessages(projectID, subID string) error {
+	fmt.Println("Listening for messages...")
+	// TODO: Implement listening logic.
+	return nil
+}
