@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"time"
 
 	"cloud.google.com/go/pubsub"
 )
@@ -68,7 +69,23 @@ func publishMessage(projectID, topicID, msg string) error {
 
 // listenForMessages listens for messages on a Pub/Sub subscription.
 func listenForMessages(projectID, subID string) error {
-	fmt.Println("Listening for messages...")
-	// TODO: Implement listening logic.
+	ctx := context.Background()
+	client, err := pubsub.NewClient(ctx, projectID)
+	if err != nil {
+		return fmt.Errorf("pubsub.NewClient: %v", err)
+	}
+	defer client.Close()
+
+	sub := client.Subscription(subID)
+	fmt.Printf("Listening for messages on %q\n", subID)
+
+	err = sub.Receive(ctx, func(_ context.Context, msg *pubsub.Message) {
+		fmt.Printf("Got message: %q\n", string(msg.Data))
+		msg.Ack()
+	})
+	if err != nil {
+		return fmt.Errorf("receive: %v", err)
+	}
+
 	return nil
 }
