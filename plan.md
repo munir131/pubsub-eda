@@ -65,7 +65,7 @@ go/
     *   Implement `NewPublisher` and `NewSubscriber`.
     *   Implement `Publish` and `Subscribe` methods satisfying the interfaces.
 
-4.  **Implement Dispatcher/Router**:
+4.  [x] **Implement Dispatcher/Router**:
     *   Create `go/internal/event/dispatcher.go`.
     *   Allow registering Handlers for specific topics.
     *   Implement logic to start listening and route incoming messages to handlers.
