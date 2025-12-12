@@ -74,7 +74,7 @@ go/
     *   Create `go/internal/jobs/logger_job.go`.
     *   Implement the `Handler` interface to log the received message.
 
-6.  **Refactor Main Entrypoint**:
+6.  [x] **Refactor Main Entrypoint**:
     *   Update `go/cmd/app/main.go`.
     *   Wire up Config -> Pub/Sub Adapter -> Dispatcher -> Jobs.
     *   Use flags/args to determine mode (Publish vs Listen) via `flag` package or subcommands.
