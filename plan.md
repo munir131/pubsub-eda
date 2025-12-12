@@ -70,7 +70,7 @@ go/
     *   Allow registering Handlers for specific topics.
     *   Implement logic to start listening and route incoming messages to handlers.
 
-5.  **Implement Sample Job**:
+5.  [x] **Implement Sample Job**:
     *   Create `go/internal/jobs/logger_job.go`.
     *   Implement the `Handler` interface to log the received message.
 
