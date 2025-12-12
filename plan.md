@@ -60,7 +60,7 @@ go/
     *   Create `go/internal/event/interfaces.go`.
     *   Define `Publisher`, `Subscriber`, `Handler`, and `Message` types.
 
-3.  **Implement GCP Pub/Sub Adapter**:
+3.  [x] **Implement GCP Pub/Sub Adapter**:
     *   Create `go/internal/platform/pubsub/client.go`.
     *   Implement `NewPublisher` and `NewSubscriber`.
     *   Implement `Publish` and `Subscribe` methods satisfying the interfaces.
