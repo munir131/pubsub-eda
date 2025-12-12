@@ -56,7 +56,7 @@ go/
     *   Implement configuration loading.
     *   Create `.env.example`.
 
-2.  **Define Event Interfaces**:
+2.  [x] **Define Event Interfaces**:
     *   Create `go/internal/event/interfaces.go`.
     *   Define `Publisher`, `Subscriber`, `Handler`, and `Message` types.
 
