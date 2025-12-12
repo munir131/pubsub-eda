@@ -53,6 +53,7 @@ You must coordinate the full workflow:
 If `plan.md` does not exist or user asks for a new feature/task:
 - Call **create-plan.md**.
 - Wait for `plan.md` to be created.
+- **IMPORTANT: Always get confirmation from user before going on next step.**
 
 ### **Step 2 — Implementation**
 Once planning exists:

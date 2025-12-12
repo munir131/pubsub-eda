@@ -5,13 +5,12 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"time"
 
 	"cloud.google.com/go/pubsub"
 )
 
 // TODO: Replace with your Google Cloud project ID.
-const projectID = "your-gcp-project-id"
+const projectID = "pubsub-eda"
 const topicName = "test"
 const subscriptionName = "test-sub"
 
