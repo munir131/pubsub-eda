@@ -1,47 +1,89 @@
-# Go Pub/Sub CLI
+# Go Pub/Sub CLI (Event-Driven Architecture)
 
-This is a command-line application for interacting with Google Cloud Pub/Sub.
+This is a production-ready, event-driven Go application for interacting with Google Cloud Pub/Sub.
+It follows 12-factor app principles and uses a modular architecture.
+
+## Directory Structure
+
+```
+go/
+├── cmd/
+│   └── app/          # Application entry point
+├── internal/
+│   ├── config/       # Configuration loading
+│   ├── event/        # Event interfaces and Dispatcher
+│   ├── jobs/         # Message handlers (Business Logic)
+│   └── platform/     # Infrastructure adapters (GCP Pub/Sub)
+├── Dockerfile        # Docker build definition
+└── .env.example      # Example environment variables
+```
 
 ## Prerequisites
 
-- Go 1.16 or later
-- Google Cloud SDK (`gcloud`)
+- Go 1.25 or later
+- Docker (optional)
+- Google Cloud Project with Pub/Sub API enabled
 
 ## Setup
 
-1.  **Authenticate with Google Cloud:**
-
+1.  **Clone the repository:**
     ```bash
-    gcloud auth application-default login
+    git clone <repo-url>
+    cd pubsub-eda/go
     ```
 
-2.  **Set your Google Cloud Project ID:**
-
-    Open `main.go` and replace `"your-gcp-project-id"` with your actual project ID.
-
-3.  **Create a Pub/Sub topic and subscription:**
-
-    You can do this via the `gcloud` CLI or the Google Cloud Console. The topic and subscription names are hardcoded in `main.go` as `test` and `test-sub`.
-
+2.  **Configure Environment:**
+    Copy `.env.example` to `.env` and fill in your values.
     ```bash
-    gcloud pubsub topics create test
-    gcloud pubsub subscriptions create test-sub --topic=test
+    cp .env.example .env
+    ```
+    Update `.env`:
+    ```env
+    PROJECT_ID=your-gcp-project-id
+    TOPIC_NAME=test-topic
+    SUBSCRIPTION_NAME=test-sub
+    GOOGLE_APPLICATION_CREDENTIALS=/path/to/key.json # If running locally without gcloud auth
+    ```
+
+3.  **Install Dependencies:**
+    ```bash
+    go mod download
     ```
 
 ## Usage
 
-### Publish a Message
+### Local Run
 
-To publish a message to the `test` topic:
-
+**Publish a message:**
 ```bash
-go run main.go publish "your message here"
+go run ./cmd/app publish "Hello World"
 ```
 
-### Listen for Messages
-
-To listen for messages from the `test-sub` subscription:
-
+**Listen for messages:**
 ```bash
-go run main.go listen
+go run ./cmd/app listen
+```
+
+### Docker Run
+
+1.  **Build the image:**
+    ```bash
+    docker build -t pubsub-app .
+    ```
+
+2.  **Run (Publish):**
+    ```bash
+    docker run --env-file .env pubsub-app publish "Hello from Docker"
+    ```
+
+3.  **Run (Listen):**
+    ```bash
+    docker run --env-file .env pubsub-app listen
+    ```
+
+## Testing
+
+Run all unit tests:
+```bash
+go test ./...
 ```
